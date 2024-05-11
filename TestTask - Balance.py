@@ -156,15 +156,14 @@ def get_balance():
     all_recordings = dict()
 
     with open('testtask - balance.txt', 'rt', encoding='utf-8') as file:
-        ind = 0
+        ind = -1
         for line in file:
 
             line = line.replace('\n', '')
-
-            if line == '':
+            if 'Дата' in line:
                 ind += 1
+            if line == '':
                 continue
-
             if ind not in all_recordings.keys():
                 all_recordings.update({ind: {line.split(':')[0]: line.split(':')[1].strip()}})
             else:
@@ -247,15 +246,15 @@ def edit_recording():
     # Собираем все записи из текстового файла
 
     with open('testtask - balance.txt', 'rt', encoding='utf-8') as file:
-        ind = 0
+        ind = -1
         for line in file:
 
             line = line.replace('\n', '')
 
-            if line == '':
+            if 'Дата' in line:
                 ind += 1
+            if line == '':
                 continue
-
             if ind not in all_recordings.keys():
                 all_recordings.update({ind: {line.split(':')[0]: line.split(':')[1].strip()}})
             else:
@@ -281,7 +280,7 @@ def edit_recording():
             else:
                 raise Exception('')
         except:
-            print(' [!] Выберите 1 или 2')
+            print(' [!] Выберите из предложенных вариантов')
 
     for field_name, field_value in all_recordings.get(id_input).items():
 
@@ -374,15 +373,14 @@ def search_recording():
     all_recordings = dict()
 
     with open('testtask - balance.txt', 'rt', encoding='utf-8') as file:
-        ind = 0
+        ind = -1
         for line in file:
 
             line = line.replace('\n', '')
-
-            if line == '':
+            if 'Дата' in line:
                 ind += 1
+            if line == '':
                 continue
-
             if ind not in all_recordings.keys():
                 all_recordings.update({ind: {line.split(':')[0]: line.split(':')[1].strip()}})
             else:
@@ -410,25 +408,25 @@ def delete_recording():
     Позволяет пользователю выбрать существующую запись и удалить ее из текстового файла.
     """
     print('\n---------------------------')
-    print('Удаление существующей записи')
+    print('Удаление существующей записи\n')
 
     all_recordings = dict()
 
     # Собираем все записи
     with open('testtask - balance.txt', 'rt', encoding='utf-8') as file:
-        ind = 0
+        ind = -1
         for line in file:
 
             line = line.replace('\n', '')
-
-            if line == '':
+            if 'Дата' in line:
                 ind += 1
+            if line == '':
                 continue
-
             if ind not in all_recordings.keys():
                 all_recordings.update({ind: {line.split(':')[0]: line.split(':')[1].strip()}})
             else:
                 all_recordings.get(ind).update({line.split(':')[0]: line.split(':')[1].strip()})
+
 
     # Выводим все записи
     for record in all_recordings.items():
